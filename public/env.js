@@ -30,6 +30,7 @@ function createProjectCard(project){
 $(document).ready(function(){
   console.log('Ready')
   
+  $('.modal').modal();
  
   //test get call
   $.get('/projects',(result) => {
