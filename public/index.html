@@ -46,16 +46,49 @@
             </div>            
         </div>
 
-        <div id="create-project-form" class="modal modal-fixed-footer">
-          <div class="modal-content">
-            <h4>Modal Header</h4>
-            <p>A bunch of text</p>
+        <div id="create-project-form" class="modal modal-fixed-footer" style="background-color: cornsilk;">
+          <div class="modal-content" >
+            <h4>Create a new project</h4>
+            <div class="row">
+              <form class="col s12">
+
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input id="project-id" type="number">
+                    <label for="project-id">Project ID</label>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input id="project-title" type="text">
+                    <label for="project-title">Project Title</label>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input id="project-description" type="text">
+                    <label for="project-description">Project Description</label>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input id="project-image" type="file" onchange="readURL(this)" accept="Image/*">
+                    <label for="project-image" style="margin-top: 15px;">Select Image</label>
+                  </div>
+                </div>
+
+              </form>
+            </div>
           </div>
           <div class="modal-footer">
-            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+            <a href="#!" class="modal-close waves-effect waves-light black btn">Close</a>
+            <a href="#!" class="waves-effect waves-light blue btn" id="save-project">Save</a>
           </div>
         </div>
-        <div style="padding-bottom: 5px; margin: 80px;" >
+        <div style="padding-bottom: 5px; margin: 80px;">
         <a class="btn-floating btn-large waves-effect waves-light black right pulse modal-trigger" href="#create-project-form"><i class="material-icons">add</i></a>
       </div>
 
@@ -68,6 +101,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
     <script src="env.js"></script>
+  
 
 </body>
 

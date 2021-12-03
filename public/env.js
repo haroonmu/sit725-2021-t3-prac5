@@ -23,14 +23,13 @@ function createProjectCard(project){
 </div>
 </div>
 </div>
-
 `;
 }
 
 $(document).ready(function(){
   console.log('Ready')
   
-  $('.modal').modal();
+  
  
   //test get call
   $.get('/projects',(result) => {
@@ -39,4 +38,32 @@ $(document).ready(function(){
     }
   })
   $('.sidenav').sidenav();
-})  
+  $('.modal').modal();
+  $('#save-project').click((e)=>{
+    //validation
+    const data = {
+      projectID : $('#project-id').val(),
+      title: $('#project-title').val(),
+      info: $('#project-description').val(),
+      img: $('#project-image').val(),
+      
+    };
+    var settings = {
+      "url": "/projects",
+      "method": "POST",
+      "timeout": 0,
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "data": JSON.stringify(data),
+    };
+    
+    $.ajax(settings).done(function (response) {
+      console.log(response);
+      $('#projects').append(createProjectCard(data));
+      var instance = M.Modal.getInstance($('.modal'));
+      instance.close();
+     
+    });
+  });
+})
