@@ -1,66 +1,40 @@
 let express = require("express");
 let dbo = require("./db/conn");
-
+let collections = require("./services/projectService")
 let app = express();
 
 //var app = require('express')();
 let http = require('http').createServer(app);
 let io = require('socket.io')(http);
 
+let projectRoute = require("./routes/projects")
+
 
 var port = process.env.PORT || 8080;
 
 app.use(express.static(__dirname + '/public'));
 app.use(express.json());
-let id = 1;
-const projects = [
-  {
-    id:id,
-    info: `Project Number # ${id} `,
-    img:null,
-  },
-  {
-    id: ++id,
-    info: `Project Number # ${id} `,
-    img:null,
-  },
-  {
-    id: ++id,
-    info: `Project Number # ${id} `,
-    img:null,
-  }, {
-    id: ++id,
-    info: `Project Number # ${id} `,
-    img:null,
-  }, {
-    id: ++id,
-    info: `Project Number # ${id} `,
-    img:null,
-    
-  },
-  
-]
+app.use("/api/projects", projectRoute);
 
-app.get("/projects", function (request, response) {
-     dbo.getDb().collection("projects").find({}).toArray(function (err,res) {
-     if (err)
-    throw err
-    response.send(res);
-});
-});
 
-app.post("/projects", function (request, response) {
-  
-  //add some validation logic
-  const project = request.body;
-  console.log(JSON.stringify(project));
-  if(project){
-    dbo.getDb().collection("projects").insertOne(project);
-  }else{
-    response.sendStatus(500);
-  }
-  response.sendStatus(204);
-});
+// app.get("/projects", function (request, response) {
+//      dbo.getDb().collection("projects").find({}).toArray(function (err,res) {
+//      if (err)
+//     throw err
+//     response.send(res);
+// });
+// });
+
+// app.post("/projects", function (request, response) {
+//   const project = request.body;
+//   console.log(JSON.stringify(project));
+//   if(project){
+//     dbo.getDb().collection("projects").insertOne(project);
+//   }else{
+//     response.sendStatus(500);
+//   }
+//   response.sendStatus(204);
+// });
 
 //socket test
 io.on('connection', (socket) => {
